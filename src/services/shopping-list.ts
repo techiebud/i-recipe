@@ -22,7 +22,9 @@ export class ShoppingListService {
 
   removeItem(index: number) {
 
-      this.ingredients.splice(index, index);
+      this.ingredients.splice(index, 1);
   }
+
+  
     
 }
