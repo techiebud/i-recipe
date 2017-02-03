@@ -10,22 +10,27 @@ import { NavParams } from 'ionic-angular'
 export class EditRecipePage {
   mode = 'New';
   selectOptions = ['Easy', 'Medium', 'Hard'];
-  receipeForm: FormGroup;
+  recipeForm: FormGroup;
   constructor(private navParams: NavParams) {}
 
   ngOnInit() {
 
     this.mode = this.navParams.get("mode");
+    this.initializeForm();
   }
 
   private initializeForm() {
 
-      this.receipeForm = new FormGroup({
+      this.recipeForm = new FormGroup({
           'title': new FormControl(null, Validators.required),
           'description': new FormControl(null, Validators.required), 
           'difficulty': new FormControl('Medium', Validators.required)
         
       });
+  }
+  onSubmit() {
+      console.log(this.recipeForm);
+    
   }
 
 }
