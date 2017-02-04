@@ -48,7 +48,14 @@ export class EditRecipePage {
           text: "Remove all Ingredients",
           role: 'destructive',
           handler: () => {
-
+              const fArray: FormArray = <FormArray>this.recipeForm.get("ingredients");
+              const len = fArray.length;
+              if (len > 0)
+              {
+                for (let i = len - 1; i >=0; i--) {
+                  fArray.removeAt(i);
+                }
+              }
           }
         },
         {
