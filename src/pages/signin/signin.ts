@@ -1,5 +1,6 @@
 import { NavController, NavParams } from 'ionic-angular';
 
+import { AuthService } from './../../services/auth';
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
@@ -9,11 +10,19 @@ import { NgForm } from '@angular/forms';
 })
 export class SigninPage {
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
   onSignin(form: NgForm) {
 
-      console.debug("onSignIn");
-      console.log(form.value);
+        this.authService.signIn(form.value.email, form.value.password)  
+          .then((data) => {
+              console.log(data);
+          })
+          .catch((error) => {
+              console.error(error.message);
+          })
+
+            
+          
   }
 }
