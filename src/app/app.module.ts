@@ -8,6 +8,8 @@ import { RecipeService } from './../services/recipe';
 import { RecipesPage } from './../pages/recipes/recipes';
 import { ShoppingListPage } from './../pages/shopping-list/shopping-list';
 import { ShoppingListService } from './../services/shopping-list';
+import { SigninPage } from './../pages/signin/signin';
+import { SignupPage } from './../pages/signup/signup';
 import { TabsPage } from './../pages/tabs/tabs';
 
 @NgModule({
@@ -17,7 +19,9 @@ import { TabsPage } from './../pages/tabs/tabs';
     RecipesPage,
     RecipePage,
     ShoppingListPage,
-    EditRecipePage
+    EditRecipePage,
+    SigninPage,
+    SignupPage
 
   ],
   imports: [
@@ -30,8 +34,9 @@ import { TabsPage } from './../pages/tabs/tabs';
     RecipesPage,
     RecipePage,
     ShoppingListPage,
-    EditRecipePage
- 
+    EditRecipePage,
+    SigninPage,
+    SigninPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, ShoppingListService, RecipeService]
 })
