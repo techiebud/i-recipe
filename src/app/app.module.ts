@@ -7,6 +7,7 @@ import { MyApp } from './app.component';
 import { RecipePage } from './../pages/recipe/recipe';
 import { RecipeService } from './../services/recipe';
 import { RecipesPage } from './../pages/recipes/recipes';
+import { SLOptionsPage } from './../pages/shopping-list/sl-options/sl-options';
 import { ShoppingListPage } from './../pages/shopping-list/shopping-list';
 import { ShoppingListService } from './../services/shopping-list';
 import { SigninPage } from './../pages/signin/signin';
@@ -22,7 +23,8 @@ import { TabsPage } from './../pages/tabs/tabs';
     ShoppingListPage,
     EditRecipePage,
     SigninPage,
-    SignupPage
+    SignupPage,
+    SLOptionsPage
 
   ],
   imports: [
@@ -37,7 +39,8 @@ import { TabsPage } from './../pages/tabs/tabs';
     ShoppingListPage,
     EditRecipePage,
     SigninPage,
-    SignupPage
+    SignupPage,
+    SLOptionsPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, ShoppingListService, RecipeService, AuthService]
 })

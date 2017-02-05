@@ -1,4 +1,4 @@
-import { ActionSheetController, AlertController, NavController, NavParams, ToastController } from 'ionic-angular'
+import { ActionSheetController, AlertController, NavController, NavParams, ToastController } from 'ionic-angular';
 import { Component, OnInit } from '@angular/core';
 import { Form, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
