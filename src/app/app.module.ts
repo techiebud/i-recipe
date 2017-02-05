@@ -36,7 +36,7 @@ import { TabsPage } from './../pages/tabs/tabs';
     ShoppingListPage,
     EditRecipePage,
     SigninPage,
-    SigninPage
+    SignupPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, ShoppingListService, RecipeService]
 })
