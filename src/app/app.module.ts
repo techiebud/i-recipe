@@ -1,6 +1,7 @@
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
+import { AuthService } from './../services/auth';
 import { EditRecipePage } from './../pages/edit-recipe/edit-recipe';
 import { MyApp } from './app.component';
 import { RecipePage } from './../pages/recipe/recipe';
@@ -38,6 +39,6 @@ import { TabsPage } from './../pages/tabs/tabs';
     SigninPage,
     SignupPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, ShoppingListService, RecipeService]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, ShoppingListService, RecipeService, AuthService]
 })
 export class AppModule {}
