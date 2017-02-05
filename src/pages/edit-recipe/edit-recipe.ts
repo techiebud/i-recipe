@@ -2,6 +2,7 @@ import { ActionSheetController, AlertController, NavController, NavParams, Toast
 import { Component, OnInit } from '@angular/core';
 import { Form, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { Recipe } from './../../models/recipe';
 import { RecipeService } from './../../services/recipe';
 
 @Component({
@@ -12,6 +13,8 @@ export class EditRecipePage {
   mode = 'New';
   selectOptions = ['Easy', 'Medium', 'Hard'];
   recipeForm: FormGroup;
+  recipe: Recipe;
+  index: number;
   constructor(private navParams: NavParams, 
       private actSheetCtrl: ActionSheetController, 
       private alrtCtrl: AlertController, 
@@ -22,16 +25,31 @@ export class EditRecipePage {
   ngOnInit() {
 
     this.mode = this.navParams.get("mode");
+    if (this.mode == 'Edit') {
+       this.recipe = this.navParams.get('recipe');
+       this.index = this.navParams.get('index');
+       
+    }
     this.initializeForm();
   }
 
   private initializeForm() {
-
+    const isEditMode = (this.mode == 'Edit');
+    let title = isEditMode ? this.recipe.title : null;
+    let description = isEditMode ? this.recipe.description : null;
+    let difficulty =  isEditMode ? this.recipe.difficulty  :  'Medium';
+    let ingredients = [];
+    if (isEditMode) {
+      for (let ingredient of this.recipe.ingredients) {
+          ingredients.push(new FormControl(ingredient.name, Validators.required));
+      }
+       
+    }
     this.recipeForm = new FormGroup({
-      'title': new FormControl(null, Validators.required),
-      'description': new FormControl(null, Validators.required),
-      'difficulty': new FormControl('Medium', Validators.required), 
-      'ingredients': new FormArray([])
+      'title': new FormControl(title, Validators.required),
+      'description': new FormControl(description, Validators.required),
+      'difficulty': new FormControl(difficulty, Validators.required), 
+      'ingredients': new FormArray(ingredients)
 
     });
   }
