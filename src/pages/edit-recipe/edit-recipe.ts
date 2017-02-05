@@ -17,7 +17,7 @@ export class EditRecipePage {
       private alrtCtrl: AlertController, 
       private toastCtrl: ToastController, 
       private recipeService: RecipeService,
-      private navCtl: NavController) { }
+      private navCtrl: NavController) { }
 
   ngOnInit() {
 
@@ -46,7 +46,7 @@ export class EditRecipePage {
     }
     this.recipeService.addRecipe(value.title, value.description, value.difficulty, value.ingredients);
     this.recipeForm.reset();
-    this.navCtl.popToRoot();
+    this.navCtrl.popToRoot();
 
   }
 
