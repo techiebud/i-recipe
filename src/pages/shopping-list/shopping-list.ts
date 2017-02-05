@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth';
 import { Component } from '@angular/core';
 import { Ingredient } from './../../models/ingredient';
 import { NgForm } from "@angular/forms";
@@ -14,34 +15,55 @@ export class ShoppingListPage {
 
   listItems: Ingredient[];
   constructor(private slService: ShoppingListService,
-              private popoverCtrl: PopoverController) {}
+              private popoverCtrl: PopoverController,
+              private authService: AuthService) { }
 
   onAddItem(form: NgForm) {
-      this.slService.addItem(form.value.ingredientName, form.value.amount);    
-      form.reset();
-      this.loadItems();
+    this.slService.addItem(form.value.ingredientName, form.value.amount);
+    form.reset();
+    this.loadItems();
   }
 
   ionViewWillEnter() {
     this.loadItems();
-    
+
   }
-  
+
   private loadItems() {
 
-       this.listItems = this.slService.getItems();
+    this.listItems = this.slService.getItems();
   }
 
   onCheckItem(index: number) {
-       this.slService.removeItem(index);
-       this.loadItems();
-    
+    this.slService.removeItem(index);
+    this.loadItems();
+
   }
 
   onShowOptions(event: MouseEvent) {
 
-        const popover = this.popoverCtrl.create(SLOptionsPage);
-        popover.present({ev: event});
-        
+    const popover = this.popoverCtrl.create(SLOptionsPage);
+    popover.present({ ev: event });
+    popover.onDidDismiss(
+        data => {
+            if (data.action == 'load')
+            {
+              
+            }
+            else {
+              this.authService.getActiveUser().getToken()
+                  .then((token: string) => {
+                    
+                  })
+                  .catch(error => {
+                    console.error(error);
+                  })
+            }
+          
+        }
+      
+    )
+
+
   }
 }
