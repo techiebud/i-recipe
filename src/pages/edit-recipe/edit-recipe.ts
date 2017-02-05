@@ -62,7 +62,15 @@ export class EditRecipePage {
          return {name: name, amount: 1};
        })
     }
-    this.recipeService.addRecipe(value.title, value.description, value.difficulty, ingredients);
+
+    if (this.mode == 'Edit')
+    {
+      this.recipeService.updateRecipe(this.index, value.title, value.description, value.difficulty, value.ingredients);
+    }
+    else 
+    {
+       this.recipeService.addRecipe(value.title, value.description, value.difficulty, ingredients);
+    }
     this.recipeForm.reset();
     this.navCtrl.popToRoot();
 
