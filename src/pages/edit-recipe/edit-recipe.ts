@@ -44,7 +44,7 @@ export class EditRecipePage {
          return {name: name, amount: 1};
        })
     }
-    this.recipeService.addRecipe(value.title, value.description, value.difficulty, value.ingredients);
+    this.recipeService.addRecipe(value.title, value.description, value.difficulty, ingredients);
     this.recipeForm.reset();
     this.navCtrl.popToRoot();
 
@@ -126,7 +126,7 @@ export class EditRecipePage {
             }
             (<FormArray>this.recipeForm.get('ingredients')).push(new FormControl(data.name, Validators.required));
               const toast = this.toastCtrl.create({
-                    message: 'Toast added!',
+                    message:  "Ingredient added!",
                     duration: 1500,
                     position: 'top'
                   
