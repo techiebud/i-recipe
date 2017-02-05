@@ -4,6 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { EditRecipePage } from './../pages/edit-recipe/edit-recipe';
 import { MyApp } from './app.component';
 import { RecipePage } from './../pages/recipe/recipe';
+import { RecipeService } from './../services/recipe';
 import { RecipesPage } from './../pages/recipes/recipes';
 import { ShoppingListPage } from './../pages/shopping-list/shopping-list';
 import { ShoppingListService } from './../services/shopping-list';
@@ -32,6 +33,6 @@ import { TabsPage } from './../pages/tabs/tabs';
     EditRecipePage
  
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, ShoppingListService]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, ShoppingListService, RecipeService]
 })
 export class AppModule {}

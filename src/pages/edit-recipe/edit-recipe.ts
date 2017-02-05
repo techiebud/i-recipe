@@ -81,7 +81,6 @@ export class EditRecipePage {
   }
 
   private createNewIngredientAlert() {
-
   const newIngredientAlert = this.alrtCtrl.create({
       title: 'Add Ingredient',
       inputs: [
