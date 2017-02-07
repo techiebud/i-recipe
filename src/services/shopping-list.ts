@@ -52,6 +52,24 @@ export class ShoppingListService {
       
   }
 
+
+  fetchList(token: string)
+  {
+
+      const userId = this.authService.getActiveUser().uid;
+
+      return this.http
+        .get('https://i-recipe-b7b42.firebaseio.com/' + userId + '/shopping-list.json?auth='  + token, this.ingredients)
+        .map((response: Response) => {
+            return response.json();
+        })
+        .do((data) => {
+            this.ingredients = data;            
+        })
+        
+      
+  }
+
   
     
 }
