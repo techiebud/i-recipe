@@ -1,8 +1,23 @@
-import { Ingredient } from './../models/ingredient';
+import 'rxjs/Rx'
 
+import {Http, Response}  from "@angular/http";
+
+import { AuthService } from './auth';
+import { Ingredient } from './../models/ingredient';
+import { Injectable } from "@angular/core";
+
+@Injectable()
 export class ShoppingListService {
 
    private ingredients: Ingredient[] = [];
+
+   /**
+    *
+    */
+   constructor(private http:  Http, private authService: AuthService) {
+       
+       
+   }
 
    addItem(name: string, amount: number) {
         this.ingredients.push(new Ingredient(name, amount));       
@@ -23,6 +38,18 @@ export class ShoppingListService {
   removeItem(index: number) {
 
       this.ingredients.splice(index, 1);
+  }
+
+  storeList(token: string) 
+  {
+      const userId = this.authService.getActiveUser().uid;
+
+      return this.http
+        .put('https://i-recipe-b7b42.firebaseio.com/' + userId + '/shopping-list.json?auth='  + token, this.ingredients)
+        .map((response: Response) => {
+            return response.json();
+        });
+      
   }
 
   

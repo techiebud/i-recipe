@@ -15,8 +15,8 @@ export class ShoppingListPage {
 
   listItems: Ingredient[];
   constructor(private slService: ShoppingListService,
-              private popoverCtrl: PopoverController,
-              private authService: AuthService) { }
+    private popoverCtrl: PopoverController,
+    private authService: AuthService) { }
 
   onAddItem(form: NgForm) {
     this.slService.addItem(form.value.ingredientName, form.value.amount);
@@ -45,23 +45,32 @@ export class ShoppingListPage {
     const popover = this.popoverCtrl.create(SLOptionsPage);
     popover.present({ ev: event });
     popover.onDidDismiss(
-        data => {
-            if (data.action == 'load')
-            {
-              
-            }
-            else {
-              this.authService.getActiveUser().getToken()
-                  .then((token: string) => {
-                    
-                  })
-                  .catch(error => {
-                    console.error(error);
-                  })
-            }
-          
+      data => {
+
+        if (!data) {
+          return;
         }
-      
+        if (data.action == 'load') {
+
+        }
+        else {
+          this.authService.getActiveUser().getToken()
+            .then((token: string) => {
+              this.slService.storeList(token)
+                .subscribe(
+                () => console.log('Success!'),
+                (error) => {
+                  console.log(error);
+                }
+                )
+            })
+            .catch(error => {
+              console.error(error);
+            })
+        }
+
+      }
+
     )
 
 
