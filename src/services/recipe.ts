@@ -1,29 +1,66 @@
-import { Ingredient } from './../models/ingredient';
-import { Recipe } from './../models/recipe';
+import 'rxjs/Rx';
 
+import { Http, Response } from "@angular/http";
+
+import { AuthService } from "./auth";
+import { Ingredient } from "../models/ingredient";
+import { Injectable } from "@angular/core";
+import { Recipe } from "../models/recipe";
+
+@Injectable()
 export class RecipeService {
-    private recipes: Recipe[] = [];
+  private recipes: Recipe[] = [];
 
-    addRecipe(title: string, description: string, difficulty: string, ingredients: Ingredient[]) {
-        this.recipes.push(new Recipe(title, description, difficulty, ingredients));
-        console.log(this.recipes);
-    }
+  constructor(private http: Http, private authService: AuthService) {}
 
-    getRecipes() {
-        return this.recipes.slice();
-    }
+  addRecipe(title: string,
+            description: string,
+            difficulty: string,
+            ingredients: Ingredient[]) {
+    this.recipes.push(new Recipe(title, description, difficulty, ingredients));
+    console.log(this.recipes);
+  }
 
-    updateRecipe(index: number,
-        title: string,
-        description: string,
-        difficulty: string,
-        ingredients: Ingredient[]
-    ) 
-         {
-            this.recipes[index] = new Recipe(title, description, difficulty, ingredients);
+  getRecipes() {
+    return this.recipes.slice();
+  }
+
+  updateRecipe(index: number,
+               title: string,
+               description: string,
+               difficulty: string,
+               ingredients: Ingredient[]) {
+    this.recipes[index] = new Recipe(title, description, difficulty, ingredients);
+  }
+
+  removeRecipe(index: number) {
+    this.recipes.splice(index, 1);
+  }
+
+  storeList(token: string) {
+    const userId = this.authService.getActiveUser().uid;
+    return this.http.put('https://i-recipe-b7b42.firebaseio.com/' + userId + '/recipes.json?auth=' + token, this.recipes)
+      .map((response: Response) => response.json());
+  }
+
+  fetchList(token: string) {
+    const userId = this.authService.getActiveUser().uid;
+    return this.http.get('https://i-recipe-b7b42.firebaseio.com/' + userId + '/recipes.json?auth=' + token)
+      .map((response: Response) => {
+        const recipes: Recipe[] = response.json() ? response.json() : [];
+        for (let item of recipes) {
+          if (!item.hasOwnProperty('ingredients')) {
+            item.ingredients = [];
+          }
         }
-
-    removeRecipe(index: number) {
-        this.recipes.splice(index, 1);
-    }
+        return recipes;
+      })
+      .do((recipes: Recipe[]) => {
+        if (recipes) {
+          this.recipes = recipes;
+        } else {
+          this.recipes = [];
+        }
+      });
+  }
 }

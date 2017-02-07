@@ -55,7 +55,6 @@ export class ShoppingListService {
 
   fetchList(token: string)
   {
-
       const userId = this.authService.getActiveUser().uid;
 
       return this.http
@@ -63,8 +62,16 @@ export class ShoppingListService {
         .map((response: Response) => {
             return response.json();
         })
-        .do((data) => {
-            this.ingredients = data;            
+        .do((ingredients: Ingredient[] ) => {
+
+            if (ingredients) {
+                this.ingredients = ingredients;
+            }
+            else 
+            {
+                this.ingredients = [];
+            }
+              
         })
         
       

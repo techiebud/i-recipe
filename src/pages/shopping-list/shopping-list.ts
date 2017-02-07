@@ -2,10 +2,10 @@ import { AlertController, LoadingController } from 'ionic-angular';
 
 import { AuthService } from './../../services/auth';
 import { Component } from '@angular/core';
+import { DatabaseOptionsPage } from './../database-options/database-options';
 import { Ingredient } from './../../models/ingredient';
 import { NgForm } from "@angular/forms";
 import { PopoverController } from 'ionic-angular';
-import { SLOptionsPage } from './sl-options/sl-options';
 import { ShoppingListService } from './../../services/shopping-list';
 
 @Component({
@@ -48,7 +48,7 @@ export class ShoppingListPage {
     const loading = this.loadingCtrl.create( {
         content: 'Please wait....'
     })
-    const popover = this.popoverCtrl.create(SLOptionsPage);
+    const popover = this.popoverCtrl.create(DatabaseOptionsPage);
     popover.present({ ev: event });
     popover.onDidDismiss(
       data => {

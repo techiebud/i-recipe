@@ -2,7 +2,6 @@ import { AlertController, LoadingController } from "ionic-angular";
 
 import { AuthService } from './../../services/auth';
 import { Component } from '@angular/core';
-import { Loading } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 
 @Component({

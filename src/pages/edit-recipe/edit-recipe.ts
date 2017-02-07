@@ -1,6 +1,6 @@
 import { ActionSheetController, AlertController, NavController, NavParams, ToastController } from 'ionic-angular';
 import { Component, OnInit } from '@angular/core';
-import { Form, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Recipe } from './../../models/recipe';
 import { RecipeService } from './../../services/recipe';
@@ -9,7 +9,7 @@ import { RecipeService } from './../../services/recipe';
   selector: 'page-edit-recipe',
   templateUrl: 'edit-recipe.html'
 })
-export class EditRecipePage {
+export class EditRecipePage implements OnInit  {
   mode = 'New';
   selectOptions = ['Easy', 'Medium', 'Hard'];
   recipeForm: FormGroup;

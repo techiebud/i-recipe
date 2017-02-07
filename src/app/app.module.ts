@@ -1,18 +1,17 @@
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-
-import { AuthService } from './../services/auth';
-import { EditRecipePage } from './../pages/edit-recipe/edit-recipe';
+import { NgModule, ErrorHandler } from '@angular/core';
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { RecipePage } from './../pages/recipe/recipe';
-import { RecipeService } from './../services/recipe';
-import { RecipesPage } from './../pages/recipes/recipes';
-import { SLOptionsPage } from './../pages/shopping-list/sl-options/sl-options';
-import { ShoppingListPage } from './../pages/shopping-list/shopping-list';
-import { ShoppingListService } from './../services/shopping-list';
-import { SigninPage } from './../pages/signin/signin';
-import { SignupPage } from './../pages/signup/signup';
-import { TabsPage } from './../pages/tabs/tabs';
+import { EditRecipePage } from "../pages/edit-recipe/edit-recipe";
+import { RecipePage } from "../pages/recipe/recipe";
+import { RecipesPage } from "../pages/recipes/recipes";
+import { ShoppingListPage } from "../pages/shopping-list/shopping-list";
+import { TabsPage } from "../pages/tabs/tabs";
+import { ShoppingListService } from "../services/shopping-list";
+import { RecipeService } from "../services/recipe";
+import { SigninPage } from "../pages/signin/signin";
+import { SignupPage } from "../pages/signup/signup";
+import { AuthService } from "../services/auth";
+import { DatabaseOptionsPage } from "../pages/database-options/database-options";
 
 @NgModule({
   declarations: [
@@ -24,7 +23,7 @@ import { TabsPage } from './../pages/tabs/tabs';
     EditRecipePage,
     SigninPage,
     SignupPage,
-    SLOptionsPage
+    DatabaseOptionsPage
 
   ],
   imports: [
@@ -40,7 +39,7 @@ import { TabsPage } from './../pages/tabs/tabs';
     EditRecipePage,
     SigninPage,
     SignupPage,
-    SLOptionsPage
+    DatabaseOptionsPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, ShoppingListService, RecipeService, AuthService]
 })
